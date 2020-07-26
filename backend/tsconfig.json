@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "watch": true,
+        "lib": ["DOM", "es2017"],
+        "outDir": "build",
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "declaration": true
+    },
+    "compileOnSave": true
+}
