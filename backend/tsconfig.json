@@ -8,8 +8,7 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
-        "declaration": true
+        "esModuleInterop": true
     },
     "compileOnSave": true
 }

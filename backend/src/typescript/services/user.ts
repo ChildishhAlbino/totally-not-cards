@@ -1,7 +1,5 @@
-import { Users } from "../types/user";
 import jwt from "jsonwebtoken";
 import { nanoid } from "nanoid";
-import { Lobby } from "../types/lobby";
 
 const lobbyState: Lobby.LobbyState = {
     users: {},

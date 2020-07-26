@@ -4,50 +4,50 @@ import jwt from "jsonwebtoken";
 import "./App.css";
 
 import openSocket from "socket.io-client";
+// import { LobbyState, User } from "totally-not-cards";
+console.log(process.env.REACT_APP_BACKEND_URL);
+const url: string =
+    process.env.REACT_APP_BACKEND_URL || "http://localhost:4000";
 const socket = openSocket("http://localhost:4000");
 
-interface User {
-    key: string;
-    userName: string;
-}
-
-interface UserResponse {
-    user: User;
-    token: string;
-}
-
-interface LobbyState {
-    users: {
-        [key: string]: User;
-    };
-    totalUsers: number;
-}
-
 function App() {
-    let [user, setUser] = useState<User | null>(null);
+    let [user, setUser] = useState<Users.User | null>(null);
     let reference = useRef<HTMLInputElement>(null);
-    let [lobbyState, setLobbyState] = useState<LobbyState>({
+    let [lobbyState, setLobbyState] = useState<Lobby.LobbyState>({
         users: {},
         totalUsers: 0
     });
 
-    let token = localStorage.getItem("token");
-    if (token && !user) {
-        try {
-            let prospectivePayload = jwt.verify(token, "SECRET");
-            console.log(prospectivePayload);
-            socket.emit("user-rejoins-lobby", { token });
-        } catch (err) {
-            console.error(err);
+    socket.on(
+        "token-check",
+        ({
+            connection,
+            token
+        }: {
+            connection: boolean;
+            token: string | null;
+        }) => {
+            console.log(connection);
+            token = localStorage.getItem("token");
+            console.log({ token, user });
+            if (token && !user) {
+                try {
+                    let prospectivePayload = jwt.verify(token, "SECRET");
+                    console.log(prospectivePayload);
+                    socket.emit("user-rejoins-lobby", { token });
+                } catch (err) {
+                    console.error(err);
+                }
+            }
         }
-    }
+    );
 
-    socket.on("user", ({ user, token }: UserResponse) => {
+    socket.on("user", ({ user, token }: Frontend.UserResponse) => {
         localStorage.setItem("token", token);
         setUser(user);
     });
 
-    socket.on("lobby-state", (data: LobbyState) => {
+    socket.on("lobby-state", (data: Lobby.LobbyState) => {
         setLobbyState(data);
     });
 

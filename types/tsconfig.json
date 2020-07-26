@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "outFile": "index.d.ts",
+    "lib": ["DOM", "es2017"],
+    "module": "System",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  },
+  "compileOnSave": true
+}

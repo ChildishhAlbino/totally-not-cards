@@ -1,0 +1,35 @@
+version: "3"
+services:
+    backend:
+        image: "node:12"
+        working_dir: /home/node/app
+        environment:
+            - NODE_ENV=development
+        volumes:
+            - "./backend/:/home/node/app"
+            - "./types:/home/node/app/node_modules/@types/totally-not-cards"
+        ports:
+            - 4000:4000
+        command: "npm run start"
+        networks:
+            - totally-not-cards-network
+    frontend:
+        user: node
+        image: "node:12"
+        working_dir: /home/node/app
+        environment:
+            - REACT_APP_BACKEND_URL=http://backend:4000
+            - NODE_ENV=development
+            - CHOKIDAR_USEPOLLING=true
+        volumes:
+            - "./frontend/:/home/node/app"
+            - "./types:/home/node/app/node_modules/@types/totally-not-cards"
+        ports:
+            - 3000:3000
+        command: "npm run start"
+        networks:
+            - totally-not-cards-network
+
+networks:
+    totally-not-cards-network:
+        driver: bridge

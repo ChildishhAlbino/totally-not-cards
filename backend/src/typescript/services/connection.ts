@@ -1,4 +1,3 @@
-import { Connection } from "../types/connection";
 import {
     connectNewUser,
     connectExistingUser,
@@ -13,6 +12,7 @@ import { handle } from "../utils/connection-utils";
 const handleConnection = (connectionContext: Connection.ConnectionContext) => {
     let { socket } = connectionContext;
     console.log(getLobbyState());
+    socket.emit("token-check", { connection: true, token: null });
     socket.emit("lobby-state", getLobbyState());
     // new connection, setup all socket pathways
     // USER JOINS LOBBY
