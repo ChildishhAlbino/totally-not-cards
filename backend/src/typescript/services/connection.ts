@@ -11,8 +11,11 @@ import { handle } from "../utils/connection-utils";
 // handler for a new Socket connection.
 const handleConnection = (connectionContext: Connection.ConnectionContext) => {
     let { socket } = connectionContext;
+    let test: Users.Test;
     console.log(getLobbyState());
+    console.log("PRE TOKEN CHECK");
     socket.emit("token-check", { connection: true, token: null });
+    console.log("POST TOKEN CHECK");
     socket.emit("lobby-state", getLobbyState());
     // new connection, setup all socket pathways
     // USER JOINS LOBBY

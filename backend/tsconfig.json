@@ -8,7 +8,11 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "baseUrl": "./node_modules",
+        "paths": {
+            "totally-not-cards": ["../types/*"]
+        }
     },
     "compileOnSave": true
 }

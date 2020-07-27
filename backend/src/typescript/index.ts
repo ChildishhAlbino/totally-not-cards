@@ -11,7 +11,8 @@ io.on("connection", (socket: SocketIO.Socket) => {
     return handleConnection({ socket, io });
 });
 
-http.listen(4000, "0.0.0.0", () => {
-    console.log("HELLo");
-    console.log("listening on *:4000");
+let port = process.env.PORT || 4000;
+
+http.listen(port, () => {
+    console.log(`listening on *:${port}`);
 });

@@ -8,7 +8,7 @@ import openSocket from "socket.io-client";
 console.log(process.env.REACT_APP_BACKEND_URL);
 const url: string =
     process.env.REACT_APP_BACKEND_URL || "http://localhost:4000";
-const socket = openSocket("http://localhost:4000");
+const socket = openSocket(url);
 
 function App() {
     let [user, setUser] = useState<Users.User | null>(null);
@@ -18,6 +18,14 @@ function App() {
         totalUsers: 0
     });
 
+    let test: Users.Test = {
+        test: "dfsd",
+        num: "dfdsf",
+        blah: "bla",
+        last: 3233,
+        sorryNotLast: "l"
+    };
+    console.log(test);
     socket.on(
         "token-check",
         ({
