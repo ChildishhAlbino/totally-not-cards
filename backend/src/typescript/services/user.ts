@@ -47,12 +47,10 @@ const generateUserObject = (userName: string): Users.User => {
     let key = null;
     do {
         let prospectiveKey = nanoid(4);
-        console.log(prospectiveKey);
         let allUsers = getAllUsers();
         let sameKey = allUsers.find((user: Users.User) => {
             return user.key === prospectiveKey && user.userName === userName;
         });
-        console.log(sameKey);
         if (!sameKey) {
             key = prospectiveKey;
         }
